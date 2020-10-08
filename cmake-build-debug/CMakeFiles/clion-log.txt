@@ -1,0 +1,6 @@
+/home/delta/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/202.7319.72/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/delta/CLionProjects/serum
+-- Found Doxygen: /usr/bin/doxygen (found version "1.8.17") found components: doxygen 
+-- Using X11 for window creation
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/delta/CLionProjects/serum/cmake-build-debug

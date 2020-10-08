@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/serum.dir/src/main.cpp.o  -o serum  vendor/glfw/src/libglfw3.a -lpthread /usr/lib/x86_64-linux-gnu/librt.so -lm -ldl 
