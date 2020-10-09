@@ -1,0 +1,8 @@
+//
+// Created by delta on 10/9/20.
+//
+
+#ifndef SERUM_APPLICATIONEVENT_H
+#define SERUM_APPLICATIONEVENT_H
+
+#endif //SERUM_APPLICATIONEVENT_H
