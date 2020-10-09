@@ -1,6 +1,10 @@
 #include <iostream>
 
+#include "Game.h"
+
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Game testGame = Game(1280, 720, "Test");
+    testGame.Run();
+
     return 0;
 }
