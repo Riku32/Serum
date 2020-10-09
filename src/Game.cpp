@@ -14,8 +14,7 @@ void Game::Initialize() {
 }
 
 void Game::LoadResources() {
-    int channels;
-    unsigned char *img = stbi_load("../assets/Banner_White.png", &width, &height, nullptr, 4);
+    unsigned char *img = stbi_load("assets/Banner_White.png", &width, &height, nullptr, 4);
 
     glGenTextures(1, &tex_brand);
     glBindTexture(GL_TEXTURE_2D, tex_brand);
@@ -43,15 +42,23 @@ void Game::Render() {
         ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
 
         // About page
-        ImGui::Begin("About Serum");
-        ImGui::Image((void*)(intptr_t)tex_brand, ImVec2(width/4, height/4));
-        ImGui::TextColored(ImVec4(1,1,0,1), "About");
-        ImGui::Text("Git commit: %s", GIT_COMMIT_HASH());
-        ImGui::Text("Branch: %s", GIT_BRANCH());
-        ImGui::End();
+        if (aboutWindow) {
+            ImGui::Begin("About Serum", &aboutWindow);
+            ImGui::Image((void*)(intptr_t)tex_brand, ImVec2(width/4, height/4));
+            ImGui::TextColored(ImVec4(1,1,0,1), "About");
+            ImGui::Text("Git commit: %s", GET_COMMIT_HASH());
+            ImGui::Text("Branch: %s", GET_BRANCH());
+            ImGui::End();
+        }
 
-        ImGui::Begin("Demo window#");
-        ImGui::Button("Hello!");
-        ImGui::End();
+        if (ImGui::BeginMainMenuBar()) {
+            if (ImGui::BeginMenu("File")) {
+                if(ImGui::MenuItem("About")) {
+                    aboutWindow = true;
+                }
+                ImGui::EndMenu();
+            }
+            ImGui::EndMainMenuBar();
+        }
     }
 }

@@ -13,6 +13,8 @@ class Game : public Serum::Application {
 
     int width, height;
     GLuint tex_brand;
+
+    bool aboutWindow = false;
 public:
     Game(int width, int height, std::string title) : Application(width, height, std::move(title)) {};
 };

@@ -14,6 +14,8 @@ file(GLOB_RECURSE ENGINE_SRC
 
 add_executable(serum ${ENGINE_SRC})
 
+file(COPY assets DESTINATION .)
+
 # -- SET VARIABLES --
 
 # Get the current working branch

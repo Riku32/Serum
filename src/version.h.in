@@ -1,12 +1,9 @@
 #pragma once
 
-//#define GIT_BRANCH @GIT_BRANCH@
-//#define GIT_COMMIT_HASH @GIT_COMMIT_HASH@
-
-const char* GIT_BRANCH() {
+const char* GET_BRANCH() {
     return "@GIT_BRANCH@";
 }
 
-const char* GIT_COMMIT_HASH() {
+const char* GET_COMMIT_HASH() {
     return "@GIT_COMMIT_HASH@";
 }
