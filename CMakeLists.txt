@@ -76,5 +76,9 @@ target_include_directories(glad PUBLIC ${GLAD_DIR}/include)
 target_include_directories(serum PUBLIC ${GLAD_DIR}/include)
 target_link_libraries(serum PUBLIC glad ${CMAKE_DL_LIBS})
 
+# glm : OpenGL mathematics
+add_subdirectory(${VENDOR_DIR}/glm)
+target_link_libraries(serum PUBLIC glm)
+
 # stb : single-file public domain libraries for C/C++
 target_include_directories(serum PUBLIC ${VENDOR_DIR}/stb)

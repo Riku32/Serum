@@ -1,14 +1,22 @@
-//
-// Created by delta on 10/9/20.
-//
+#pragma once
 
-#ifndef SERUM_LAYER_H
-#define SERUM_LAYER_H
+#include <string>
 
+#include "DeltaTime.h"
 
-class Layer {
+namespace Serum {
+    class Layer {
+    public:
+        explicit Layer(std::string name = "Layer");
+        virtual ~Layer() = default;
 
-};
+        virtual void OnCreate() {}
+        virtual void OnDestroy() {}
 
+        virtual void OnUpdate(DeltaTime dt) {}
 
-#endif //SERUM_LAYER_H
+        std::string GetLayerName() { return layerName; }
+    protected:
+        std::string layerName;
+    };
+}

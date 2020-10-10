@@ -1,34 +1,34 @@
 #include "Application.h"
 
+#include "../imgui_impl/imgui_theme.h"
+#include "../Events/ApplicationEvent.h"
+
 namespace Serum {
     void Application::Run() {
         Log::Init();
 
         Initialize();
 
-        WindowManager::CreateWindow(InitialWindowWidth, InitialWindowHeight, InitialWindowTitle.c_str());
+        Window::CreateWindow(InitialWindowWidth, InitialWindowHeight, InitialWindowTitle.c_str());
+        Window::SetEventCallback(BIND_EVENT_FN(OnEvent));
 
         // Initialize ImGui
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
         ImGuiIO &io = ImGui::GetIO(); (void)io;
 
-        io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Keyboard controls
-        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable docking mode
-        //io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable; // Multi viewport
+        io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;kok
 
-        ImGui_ImplGlfw_InitForOpenGL(WindowManager::Window, true);
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+
+        ImGui_ImplGlfw_InitForOpenGL(Window::GetWindow(), true);
         ImGui_ImplOpenGL3_Init("#version 410");
         ImGui::StyleColorsDark();
 
-        // When viewport enabled tweak WindowRounding/WindowBg
-        ImGuiStyle& style = ImGui::GetStyle();
-        style.WindowRounding = 0.0f;
-        style.Colors[ImGuiCol_WindowBg].w = 1.0f;
-
+        UseTheme();
         LoadResources();
 
-        while(!glfwWindowShouldClose(WindowManager::Window)) {
+        while(!glfwWindowShouldClose(Window::GetWindow())) {
             this->DeltaTime = static_cast<float>(glfwGetTime()) - this->TotalElapsedSeconds;
             this->TotalElapsedSeconds = static_cast<float>(glfwGetTime());
 
@@ -42,12 +42,12 @@ namespace Serum {
             Update();
             Render();
 
-            io.DisplaySize = ImVec2((float)std::get<0>(WindowManager::WindowSize), (float)std::get<1>(WindowManager::WindowSize));
+            io.DisplaySize = ImVec2((float)std::get<0>(Window::WindowSize), (float)std::get<1>(Window::WindowSize));
 
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-            glfwSwapBuffers(WindowManager::Window);
+            glfwSwapBuffers(Window::GetWindow());
         }
 
         // Destroy ImGui
@@ -55,10 +55,13 @@ namespace Serum {
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
 
-        WindowManager::CloseWindow();
+        Window::CloseWindow();
     }
 
     Application::Application(int initialWindowWidth, int initialWindowHeight, std::string initialWindowTitle)
             : InitialWindowWidth(initialWindowWidth), InitialWindowHeight(initialWindowHeight),
               InitialWindowTitle(std::move(initialWindowTitle)) {}
+
+    void Application::OnEvent(Event &e) {
+    }
 }

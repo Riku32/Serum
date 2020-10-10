@@ -6,12 +6,16 @@
 #include "../imgui_impl/imgui_impl_glfw.h"
 #include "../imgui_impl/imgui_impl_opengl3.h"
 
-#include "WindowManager.h"
+#include "Window.h"
+#include "../Events/Event.h"
+#include "../Events/ApplicationEvent.h"
 
 namespace Serum {
     class Application {
     public:
         Application(int initialWindowWidth, int initialWindowHeight, std::string initialWindowTitle);
+
+        void OnEvent(Event& e);
 
         void Run();
     protected:
@@ -26,5 +30,9 @@ namespace Serum {
 
         virtual void Update() = 0;
         virtual void Render() = 0;
+
+        bool OnWindowClose(WindowCloseEvent &e);
+
+        bool OnWindowResize(WindowResizeEvent &e);
     };
 }

@@ -1,8 +1,15 @@
-//
-// Created by delta on 10/9/20.
-//
+#pragma once
 
-#ifndef SERUM_DELTATIME_H
-#define SERUM_DELTATIME_H
+namespace Serum {
+    class DeltaTime {
+    public:
+        explicit DeltaTime(float time = 0) : time(time) {}
 
-#endif //SERUM_DELTATIME_H
+        explicit operator float() const { return time; }
+
+        float GetSeconds() const { return time; }
+        float GetMilliseconds() const { return time * 1000.0f; }
+    private:
+        float time;
+    };
+}

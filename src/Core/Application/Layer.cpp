@@ -1,5 +1,7 @@
-//
-// Created by delta on 10/9/20.
-//
-
 #include "Layer.h"
+
+#include <utility>
+
+namespace Serum {
+    Layer::Layer(std::string name) : layerName(std::move(name)) {}
+}
